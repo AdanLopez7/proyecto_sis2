@@ -49,6 +49,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 170, -1));
+
+        campoContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoContraActionPerformed(evt);
+            }
+        });
         getContentPane().add(campoContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 170, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user-2.png"))); // NOI18N
@@ -106,6 +112,11 @@ public class Login extends javax.swing.JFrame {
         i.ejecutar();              
         
     }//GEN-LAST:event_botonRegistrarseActionPerformed
+
+    private void campoContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoContraActionPerformed
+        // TODO add your handling code here:
+        //
+    }//GEN-LAST:event_campoContraActionPerformed
 
     public static void main(String args[]) {
        
