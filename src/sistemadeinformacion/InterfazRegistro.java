@@ -142,14 +142,17 @@ public class InterfazRegistro extends javax.swing.JFrame {
 
     private void campoContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoContraKeyTyped
         // TODO add your handling code here:
-        char validar = evt.getKeyChar(); 
+        char num = evt.getKeyChar(); 
+        char letra = evt.getKeyChar();
              
-              if((validar < '0'|| validar > '9') && campoContra.getText().contains(".")&&(validar!=(char)KeyEvent.VK_BACK_SPACE)){
+              if((num < '0'|| num > '9') && (letra < 'a'|| letra > 'z')){
                   evt.consume();
                
-              JOptionPane.showMessageDialog(null, "ingrese solo nuneros","validar num", JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null, "ingrese solo nuneros o letras minusculas", "Advertencia",JOptionPane.ERROR_MESSAGE );
+              campoContra.setText("");
+              campoContra.requestFocus();
           }
-              else JOptionPane.showMessageDialog(rootPane, "Bienvenido al sistema");
+              //else JOptionPane.showMessageDialog(rootPane, "Bienvenido al sistema");
     }//GEN-LAST:event_campoContraKeyTyped
 
     //metodo para validar correo electronico
