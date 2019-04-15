@@ -17,6 +17,11 @@ public class InterfazDocente extends javax.swing.JFrame {
     public InterfazDocente() {
         initComponents();
     }
+    
+    public void probando()
+    {
+        System.out.println("hola");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
