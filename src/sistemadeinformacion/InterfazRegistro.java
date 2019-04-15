@@ -1,8 +1,11 @@
 
 package sistemadeinformacion;
 
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.sql.PreparedStatement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -56,6 +59,11 @@ public class InterfazRegistro extends javax.swing.JFrame {
         jLabel4.setText("Correo:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
 
+        campoContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoContraActionPerformed(evt);
+            }
+        });
         campoContra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campoContraKeyTyped(evt);
@@ -70,6 +78,11 @@ public class InterfazRegistro extends javax.swing.JFrame {
         });
         getContentPane().add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 160, 30));
 
+        campoCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoCorreoFocusLost(evt);
+            }
+        });
         campoCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoCorreoActionPerformed(evt);
@@ -131,14 +144,41 @@ public class InterfazRegistro extends javax.swing.JFrame {
         // TODO add your handling code here:
         char validar = evt.getKeyChar(); 
              
-         
-          if(Character.isDigit(validar)) { 
-              getToolkit().beep(); 
-              evt.consume(); 
+              if((validar < '0'|| validar > '9') && campoContra.getText().contains(".")&&(validar!=(char)KeyEvent.VK_BACK_SPACE)){
+                  evt.consume();
                
-              JOptionPane.showMessageDialog(rootPane, "ingrese solo nuneros");
+              JOptionPane.showMessageDialog(null, "ingrese solo nuneros","validar num", JOptionPane.INFORMATION_MESSAGE);
           }
+              else JOptionPane.showMessageDialog(rootPane, "Bienvenido al sistema");
     }//GEN-LAST:event_campoContraKeyTyped
+
+    //metodo para validar correo electronico
+    public boolean isEmail(String correo){
+    
+        Pattern pat = null;
+        Matcher mat = null;
+        pat = Pattern.compile("^[\\w\\\\\\+]+(\\.[\\w\\\\]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z](2,4)$)");
+        mat =pat.matcher(correo);
+        if (mat.find()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    private void campoCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoCorreoFocusLost
+        // TODO add your handling code here:
+        if(isEmail(campoCorreo.getText())){
+          
+        }else{
+            JOptionPane.showMessageDialog(null,"Email no valido","Validar Email",JOptionPane.INFORMATION_MESSAGE);
+            campoCorreo.requestFocus();
+        }
+        
+    }//GEN-LAST:event_campoCorreoFocusLost
+
+    private void campoContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoContraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoContraActionPerformed
 
 
     public static void main(String args[]) {
