@@ -55,6 +55,12 @@ public class InterfazRegistro extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(240, 240, 240));
         jLabel4.setText("Correo:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
+
+        campoContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoContraKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 160, 30));
 
         campoUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +126,19 @@ public class InterfazRegistro extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void campoContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoContraKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar(); 
+             
+         
+          if(Character.isDigit(validar)) { 
+              getToolkit().beep(); 
+              evt.consume(); 
+               
+              JOptionPane.showMessageDialog(rootPane, "ingrese solo nuneros");
+          }
+    }//GEN-LAST:event_campoContraKeyTyped
 
 
     public static void main(String args[]) {

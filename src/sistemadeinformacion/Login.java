@@ -48,6 +48,11 @@ public class Login extends javax.swing.JFrame {
                 campoUsuarioActionPerformed(evt);
             }
         });
+        campoUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoUsuarioKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 170, -1));
 
         campoContra.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +122,10 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         //
     }//GEN-LAST:event_campoContraActionPerformed
+
+    private void campoUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoUsuarioKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoUsuarioKeyTyped
 
     public static void main(String args[]) {
        

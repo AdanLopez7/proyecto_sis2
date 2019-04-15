@@ -5,6 +5,8 @@
  */
 package sistemadeinformacion;
 
+import java.awt.Color;
+
 /**
  *
  * @author Adan
@@ -16,6 +18,9 @@ public class SistemaDeInformacion {
      */
     public static void main(String[] args) {
         System.out.println("hola esto es mi repositorio");
+        
     }
+    
+   
     
 }
