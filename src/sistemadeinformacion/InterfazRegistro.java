@@ -117,7 +117,7 @@ public class InterfazRegistro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoCorreoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         
          int i=SeleccionCombo.getSelectedIndex();
         if(i==0)
@@ -138,7 +138,8 @@ public class InterfazRegistro extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                                
+
 
     private void campoContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoContraKeyTyped
         // TODO add your handling code here:
@@ -251,7 +252,7 @@ public class InterfazRegistro extends javax.swing.JFrame {
     private javax.swing.JTextField campoUsuario;
     private javax.swing.JLabel eti_registro;
     private javax.swing.JLabel eti_usuario;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botonCrearCuenta;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
