@@ -5,17 +5,69 @@
  */
 package sistemadeinformacion;
 
-/**
- *
- * @author Adan
- */
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 public class InterfazEstudiante extends javax.swing.JFrame {
 
+     Connection miConexion;
     /**
      * Creates new form InterfazEstudiante
      */
-    public InterfazEstudiante() {
+    public InterfazEstudiante(String nombre,String apellido,String user) {
+        eti_bienvenida=new javax.swing.JLabel();
         initComponents();
+        this.setLocationRelativeTo(null);
+        eti_bienvenida.setText(nombre+" "+apellido);
+        Usuario=user;
+        mostrarMaterias();
+        setVisible(true);
+    }
+    
+    public void mostrarMaterias()
+    {
+        
+         try
+        {
+            DefaultTableModel modelo=new DefaultTableModel();
+            tablaMaterias.setModel(modelo);
+            
+            PreparedStatement ps=null;
+            ResultSet rs=null;
+            miConexion=DriverManager.getConnection("jdbc:mysql://localhost:3306/proyecto_sis2","root","");   
+         // 2 creae objeto statement
+            Statement miStatement=miConexion.createStatement();
+            
+            String sql="SELECT nombre FROM materia";
+            
+            ps=miConexion.prepareStatement(sql);
+            
+            //ps.setString(1,Usuario);
+            rs=ps.executeQuery();
+            
+            ResultSetMetaData rsMd=rs.getMetaData();
+            
+            int cantidadColumnas=rsMd.getColumnCount();
+            
+            
+            modelo.addColumn("Nombre Materia");
+            
+            while(rs.next()){
+                   Object[] filas=new Object[cantidadColumnas];
+            
+                  for(int i=0;i<cantidadColumnas;i++)
+                     {
+                         filas[i]=rs.getObject(i+1);
+                     }
+                 modelo.addRow(filas);
+            }
+           
+        }catch(SQLException e)
+        {
+            System.out.println("error "+Usuario);
+        }
     }
 
     /**
@@ -27,27 +79,105 @@ public class InterfazEstudiante extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        eti_bienvenida = new javax.swing.JLabel();
+        tablaPanel = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaMaterias = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        eti_codigo_materia = new javax.swing.JLabel();
+        campoCodigoM = new javax.swing.JTextField();
+        botonUnirse = new javax.swing.JButton();
+        fondo = new javax.swing.JLabel();
+
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login.jpg"))); // NOI18N
-        jLabel1.setText("Accediste como estudiante");
+        eti_bienvenida.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        eti_bienvenida.setForeground(new java.awt.Color(240, 240, 240));
+        getContentPane().add(eti_bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 110, 20));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, Short.MAX_VALUE)
-        );
+        tablaMaterias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Nombre materia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaMaterias);
+
+        tablaPanel.addTab("Mis cursos", jScrollPane1);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        eti_codigo_materia.setText("Codigo de la materia:");
+        jPanel1.add(eti_codigo_materia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        campoCodigoM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoCodigoMActionPerformed(evt);
+            }
+        });
+        jPanel1.add(campoCodigoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 130, -1));
+
+        botonUnirse.setText("Unirse");
+        botonUnirse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonUnirseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, -1, -1));
+
+        tablaPanel.addTab("Unirse a la materia", jPanel1);
+
+        getContentPane().add(tablaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 370, 140));
+
+        fondo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login.jpg"))); // NOI18N
+        fondo.setText("Accediste como estudiante");
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void campoCodigoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCodigoMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoCodigoMActionPerformed
+
+    private void botonUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonUnirseActionPerformed
+       
+         try{
+         //1 Crear Conexion 
+          miConexion=DriverManager.getConnection("jdbc:mysql://localhost:3306/proyecto_sis2","root","");   
+         // 2 preparar la consulta
+         PreparedStatement miSentencia=miConexion.prepareStatement("INSERT INTO relacionadora (usuario,codigo) VALUES (?,?)");
+         //3 establecer parametros de la consulta
+          miSentencia.setString(1,Usuario);
+          miSentencia.setString(2,campoCodigoM.getText().trim());
+         
+          miSentencia.executeUpdate();
+          JOptionPane.showMessageDialog(this,"Te as unido al curso");
+        }catch(Exception error)
+        {
+            System.out.println("no se puede conectar a base de datos"+Usuario);
+        }
+        
+        
+    }//GEN-LAST:event_botonUnirseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -86,14 +216,27 @@ public class InterfazEstudiante extends javax.swing.JFrame {
     
     public void ejecutar()
     {
+         
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazEstudiante().setVisible(true);
+               // new InterfazEstudiante().setVisible(true);
             }
         });
+       
     }
-
+    private String Usuario;
+    private String Nombre;
+    private String Apellidos;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton botonUnirse;
+    private javax.swing.JTextField campoCodigoM;
+    private javax.swing.JLabel eti_bienvenida;
+    private javax.swing.JLabel eti_codigo_materia;
+    private javax.swing.JLabel fondo;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaMaterias;
+    private javax.swing.JTabbedPane tablaPanel;
     // End of variables declaration//GEN-END:variables
 }
